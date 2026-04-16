@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17
+    container_name: geeken-biblioteck-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-geeken-biblioteck-user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-geeken-biblioteck-password}
+      POSTGRES_DB: ${DB_NAME:-geeken_biblioteck}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
