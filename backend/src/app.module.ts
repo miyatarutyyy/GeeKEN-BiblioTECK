@@ -6,7 +6,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { APP_GUARD } from '@nestjs/core';
+
 import { UsersModule } from './users/users.module';
+import { DevAuthGuard } from './auth/dev-auth.guard';
 
 @Module({
   imports: [
@@ -28,6 +31,12 @@ import { UsersModule } from './users/users.module';
       }),
     }),
     UsersModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: DevAuthGuard,
+    },
   ],
 })
 export class AppModule {}

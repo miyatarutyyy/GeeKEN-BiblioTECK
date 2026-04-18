@@ -8,9 +8,11 @@
  */
 import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { OnboardingDto } from './dto/onboarding.dto';
-import { UsersService } from './users.service';
+import { Request } from 'express';
 
-type AuthUser = { githubUserId: string; githubUsername: string };
+import { UsersService } from './users.service';
+import { AuthUser } from '../auth/types/auth-user.type';
+
 type AuthenticatedRequest = Request & { user: AuthUser };
 
 @Controller('users')
