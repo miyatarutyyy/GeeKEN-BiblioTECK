@@ -37,7 +37,7 @@ export class DevAuthGuard implements CanActivate {
     }
 
     const githubUsername =
-      this.pickHeader(req.headers['x-dev-github-user-id'])?.trim() ||
+      this.pickHeader(req.headers['x-dev-github-username'])?.trim() ||
       'dev_user';
     req.user = { githubUserId, githubUsername };
     return true;
