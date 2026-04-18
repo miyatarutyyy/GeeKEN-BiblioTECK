@@ -46,6 +46,26 @@ npm install
 npm run dev
 ```
 
+## Backend テスト実行
+
+e2e テストは Nest アプリ起動時に DB 接続を行うため、先に DB を起動してください。
+
+```bash
+docker compose up -d db
+cd backend
+npm run lint
+npm test
+npm run test:e2e
+npm run build
+```
+
+## User API（開発用認証ヘッダー）
+
+`/users/onboarding` と `/users/me` は開発用ヘッダー認証を前提とします。
+
+- 必須: `x-dev-github-user-id`
+- 任意: `x-dev-github-username`（未指定時は `dev_user`）
+
 ## 環境変数
 
 バックエンドはリポジトリルートの `.env` を参照します（`backend/src/app.module.ts` で `../.env` を指定）。
