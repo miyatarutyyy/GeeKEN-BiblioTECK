@@ -1,6 +1,15 @@
+// GeeKEN_BiblioTECK/backend/src/app.module.ts
+
+/*
+ * TypeORM設定 と UserModuleを読み込む
+ */
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { APP_GUARD } from '@nestjs/core';
+
+import { UsersModule } from './users/users.module';
+import { DevAuthGuard } from './auth/dev-auth.guard';
 
 @Module({
   imports: [
@@ -21,6 +30,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         synchronize: true,
       }),
     }),
+    UsersModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: DevAuthGuard,
+    },
   ],
 })
 export class AppModule {}
